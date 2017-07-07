@@ -17,6 +17,8 @@ var db = mongoose.connection;
 
 app.get("/",function(req,res){
     console.log("*********************************************************");
+    console.log("*********************************************************");
+    console.log("*********************************************************");
     res.send('xxxxxxxxxxx');
 });
 app.get("/api/quizes",function(req,res){
