@@ -1,0 +1,16 @@
+{
+  "name": "turtleproject",
+  "version": "1.0.0",
+  "description": "quiz",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies":{
+    "express":"4.15.3",
+    "body-parser":"1.17.2",
+    "mongoose":"4.11.1"
+  },
+  "author": "mahmoud",
+  "license": "ISC"
+}
