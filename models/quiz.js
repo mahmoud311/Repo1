@@ -6,7 +6,8 @@ var quizSchema = mongoose.Schema({
         required: true
     },
     qnumber: {
-        type: Number
+        type: Number,
+        default: 0
     },
     Question: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -21,7 +22,9 @@ var Quiz = module.exports = mongoose.model('Quiz', quizSchema);
 //get all Questioins
 module.exports.getQuizes = function (callback, limit) {
     console.log("*************&&&&&&&&&&&&&&**************")
-    Quiz.find({}, function (err, data) {
+    Quiz.find({})
+    .populate('Question')
+    .exec(function (err, data) {
         if (err) {
             console.log(err);
             callback("CANNTasdfasdf");
@@ -30,8 +33,24 @@ module.exports.getQuizes = function (callback, limit) {
             callback(null, data);
         }
     });
-    module.exports.addQuiz = function (quiz, callback) {
-        console.log(quiz);
-       Quiz.create(quiz, callback);
-    }
+}
+module.exports.addQuiz = function (quiz, callback) {
+    console.log(quiz);
+   // quiz.$inc
+    var newQuiz = new Quiz({
+        qname:quiz.qname
+    });
+            console.log("//////////////////");
+            console.log(newQuiz);
+    
+    newQuiz.save(newQuiz,function(err,savedObject){
+        if(err || !savedObject){
+            callback('ERR_CANT_SAVE_NEW_Quiz'); 
+        }else{
+           // module.quiz.findOneAndUpdate
+            console.log("7878787878787");
+            console.log(savedObject);
+            callback(null,savedObject);
+        }
+    });
 }

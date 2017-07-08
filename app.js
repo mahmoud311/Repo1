@@ -14,59 +14,52 @@ app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/turtleDB');
 var db = mongoose.connection;
-
-app.get("/",function(req,res){
-    console.log("*********************************************************");
-    console.log("*********************************************************");
-    console.log("*********************************************************");
+app.get("/", function (req, res) {
     console.log("*********************************************************");
     res.send('xxxxxxxxxxx');
 });
-app.get("/api/quizes",function(req,res){
-    Quiz.getQuizes(function(err,quizes){
-        if(err){
+app.get("/api/quizzes", function (req, res) {
+    Quiz.getQuizes(function (err, quizes) {
+        if (err) {
             console.log(err)
             throw err;
         }
         res.json(quizes);
     })
 });
-app.post("/api/quizes",function(req,res){
-    console.log("*********************************************************");
-    console.log(req);
+app.post("/api/addQuiz", function (req, res) {
+    console.log("11111111111******************************************");
     var quiz = req.body;
-    Quiz.addQuiz(quiz,function(err,quiz){
-        if(err){
-            throw err;
+    console.log(quiz);
+    Quiz.addQuiz(quiz, function (err, quiz) {
+        
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(quiz);
         }
-        res.json(quiz);
     })
 });
 
-
-
 // get questions
-app.get("/api/questions",function(req,res){
-     Question.getQuestions(function(err,question){
-        if(err){
+app.get("/api/questions", function (req, res) {
+    Question.getQuestions(function (err, question) {
+        if (err) {
             console.log(err)
             throw err;
         }
         res.json(question);
     })
 });
-
-app.post("/api/questions",function(req,res){
+app.post("/api/questions", function (req, res) {
     console.log("*******************@@@@@@@@@@@******************");
     console.log(req);
     var question = req.body;
-    Question.addQuestion(question,function(err,question){
-        if(err){
+    Question.addQuestion(question, function (err, question) {
+        if (err) {
             throw err;
         }
         res.json(question);
-        console.log("uououououououououououououououou");
-        console.log(question._id);
     })
 });
 app.listen(3001);
