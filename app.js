@@ -16,6 +16,7 @@ mongoose.connect('mongodb://localhost:27017/turtleDB');
 var db = mongoose.connection;
 app.get("/", function (req, res) {
     console.log("*********************************************************");
+    console.log("**************totototototootototototot***************");
     res.send('xxxxxxxxxxx');
 });
 app.get("/api/quizzes", function (req, res) {
