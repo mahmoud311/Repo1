@@ -41,7 +41,15 @@ app.post("/api/addQuiz", function (req, res) {
         }
     })
 });
-
+//get questions by ID quiz
+app.get('/api/quizzes/:_id',function(req,res){
+    Quiz.getQuizById(req.params._id,function(err,genre){
+        if(err){
+            throw err;
+        }
+        res.json(genre);
+    })
+});
 // get questions
 app.get("/api/questions", function (req, res) {
     Question.getQuestions(function (err, question) {
