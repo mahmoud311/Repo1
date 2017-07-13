@@ -43,19 +43,29 @@ app.post("/api/addQuiz", function (req, res) {
 });
 //get questions by ID quiz
 app.get('/api/quizzes/:_id',function(req,res){
-    Quiz.getQuizById(req.params._id,function(err,genre){
+    Quiz.getQuizById(req.params._id,function(err,quiz){
         if(err){
             throw err;
         }
-        res.json(genre);
+        res.json(quiz);
     })
 });
+// get 5 questions by ID quiz
+app.get('/api/quiz',function(req,res){
+    console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+    console.log(req.query);
+    Quiz.getQuizByIdJust5Ques(req.query,function(err,quiz){
+        if(err){
+            console.log(err);
+        }
+        res.json(quiz);
+    })
+}); 
 // get questions
 app.get("/api/questions", function (req, res) {
     Question.getQuestions(function (err, question) {
         if (err) {
-            console.log(err)
-            throw err;
+            console.log(err);
         }
         res.json(question);
     })

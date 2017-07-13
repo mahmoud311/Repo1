@@ -46,6 +46,7 @@ module.exports.getQuizById = function (quiz, callback) {
     Quiz.findOne({ _id: quiz })
         .select('Question')
         .populate('Question')
+        .sort({ '_id': -1 })
         .exec(function (err, data) {
             if (err) {
                 console.log(err);
@@ -55,8 +56,24 @@ module.exports.getQuizById = function (quiz, callback) {
                 callback(null, data);
             }
         });
-   // console.log({ _id: quiz });
-   // Quiz.findOne({ _id: quiz }, callback);
+    // console.log({ _id: quiz });
+    // Quiz.findOne({ _id: quiz }, callback);
+}
+module.exports.getQuizByIdJust5Ques = function (quiz, callback) {
+    console.log("******$$$$$$*******55555555555555**********$$$$$$$****");
+    console.log(quiz._id);
+    Question.find({ quiz_id: '5965dd668fa1b42a30d64b4b', _id: { $gt: quiz._id } })
+        .sort({ '_id': -1 })
+        .limit(5)
+        .exec(function (err, data) {
+            if (err) {
+                console.log(err);
+                callback("Can't get data");
+            } else {
+                console.log(data)
+                callback(null, data);
+            }
+        })
 }
 
 
