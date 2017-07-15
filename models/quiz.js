@@ -62,18 +62,35 @@ module.exports.getQuizById = function (quiz, callback) {
 module.exports.getQuizByIdJust5Ques = function (quiz, callback) {
     console.log("******$$$$$$*******55555555555555**********$$$$$$$****");
     console.log(quiz._id);
-    Question.find({ quiz_id: '5965dd668fa1b42a30d64b4b', _id: { $gt: quiz._id } })
-        .sort({ '_id': -1 })
-        .limit(5)
-        .exec(function (err, data) {
-            if (err) {
-                console.log(err);
-                callback("Can't get data");
-            } else {
-                console.log(data)
-                callback(null, data);
-            }
-        })
+    if (quiz._id == null) {
+        Question.find({ quiz_id: '5965dd668fa1b42a30d64b4b' })
+            // .sort({ '_id': -1 })
+            .sort({"created_at": 1})
+            .limit(5)
+            .exec(function (err, data) {
+                if (err) {
+                    console.log(err);
+                    callback("Can't get data");
+                } else {
+                    console.log(data)
+                    callback(null, data);
+                }
+            })
+    } else {
+        Question.find({ quiz_id: '5965dd668fa1b42a30d64b4b', _id: { $gt: quiz._id } })
+            // .sort({ '_id': -1 })
+            .sort({"created_at": 1})
+            .limit(5)
+            .exec(function (err, data) {
+                if (err) {
+                    console.log(err);
+                    callback("Can't get data");
+                } else {
+                    console.log(data)
+                    callback(null, data);
+                }
+            })
+    }
 }
 
 
